@@ -1,0 +1,14 @@
+# Antigravity agent configurations & skills
+.agents/
+skills-lock.json
+
+# Scratch & temporary artifacts
+scratch/
+*.py
+*.log
+
+# OS & Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

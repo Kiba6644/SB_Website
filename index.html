@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMSCE IEEE Student Branch · B.M.S. College of Engineering</title>
+  <meta name="description" content="Official student branch of IEEE at B.M.S. College of Engineering, Bengaluru. Advancing technological innovation, technical chapters, and student engineering excellence since 2009.">
+  <script>
+    (function () {
+      try {
+        const storedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        // Default to dark mode as requested for bklit.com aesthetic, or follow stored theme
+        if (storedTheme === 'dark' || (!storedTheme && prefersDark) || !storedTheme) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=2.5">
+</head>
+<body>
+
+  <!-- Ambient Dot Grid Pattern (Bklit UI Style) -->
+  <div class="bg-grid-pattern" aria-hidden="true"></div>
+
+  <!-- Top Announcement Bar -->
+  <aside class="announcement-bar" aria-label="Branch Announcement">
+    <div class="container announcement-inner">
+      <span class="announcement-tag">ANNOUNCEMENT</span>
+      <span class="announcement-text">IEEEXtreme 24-hour programming challenge registrations are now open.</span>
+      <a href="#events" class="announcement-link" id="announcement-cta">View Details &rarr;</a>
+    </div>
+  </aside>
+
+  <!-- Navigation -->
+  <header class="site-header" id="header">
+    <div class="container header-inner">
+      <a href="#" class="brand" aria-label="BMSCE IEEE Home">
+        <span class="brand-title">BMSCE IEEE</span>
+        <span class="brand-badge">BRANCH 06261 · R10</span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Main Navigation">
+        <ul class="nav-links">
+          <li><a href="#chapters" class="nav-link">Chapters</a></li>
+          <li><a href="#events" class="nav-link">Events</a></li>
+          <li><a href="#initiatives" class="nav-link">Initiatives</a></li>
+          <li><a href="#about" class="nav-link">About</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Minimal Dark Mode Toggle Button -->
+        <button type="button" class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme" title="Toggle theme (Light / Dark)">
+          <svg class="sun-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"></circle>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+          </svg>
+          <svg class="moon-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+          </svg>
+        </button>
+
+        <button type="button" class="btn btn-secondary btn-sm kbd-trigger" id="search-trigger" title="Quick Register">
+          <span>Register</span>
+          <kbd>/</kbd>
+        </button>
+        <a href="#chapters" class="btn btn-primary btn-sm">Explore</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <!-- Bklit.com Style Geometric Blueprint Landing Section (Exact Wide 6x3 CAD Layout) -->
+    <section class="bklit-landing-section" id="hero">
+      <!-- Left Vertical Coordinate Ruler -->
+      <div class="bklit-ruler-axis" aria-hidden="true">
+        <span>100</span>
+        <span>200</span>
+        <span>300</span>
+        <span>400</span>
+        <span>500</span>
+        <span>600</span>
+        <span>700</span>
+        <span>800</span>
+      </div>
+
+      <div class="bklit-container">
+        <!-- Blueprint Grid Box with Exact 6x3 Proportions (Wide Screen Blueprint) -->
+        <div class="bklit-grid-box">
+          <!-- CAD 32px Corner Extension Tick Lines -->
+          <div class="cad-tick-tl-v" aria-hidden="true"></div>
+          <div class="cad-tick-tl-h" aria-hidden="true"></div>
+          <div class="cad-tick-tr-v" aria-hidden="true"></div>
+          <div class="cad-tick-tr-h" aria-hidden="true"></div>
+          <div class="cad-tick-bl-v" aria-hidden="true"></div>
+          <div class="cad-tick-bl-h" aria-hidden="true"></div>
+          <div class="cad-tick-br-v" aria-hidden="true"></div>
+          <div class="cad-tick-br-h" aria-hidden="true"></div>
+
+          <!-- Corner Hatched Accent Squares: Top-Right & Bottom-Left -->
+          <div class="corner-accent-tr" aria-hidden="true"></div>
+          <div class="corner-accent-bl" aria-hidden="true"></div>
+
+          <!-- 6 cols x 3 rows Background Grid Wireframe (0px gap, 1px lines) -->
+          <div class="bklit-grid-lines" aria-hidden="true">
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+            <div class="grid-col"></div>
+          </div>
+
+          <!-- Dynamic GridCellPulse Animated Layer (bklit.com 1:1) -->
+          <div class="bklit-pulse-layer" aria-hidden="true" data-grid-pulse="true">
+            <div class="pulse-cell" data-index="0" data-col="0" data-row="0">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-0" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-0)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="1" data-col="1" data-row="0">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-1" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,7 l2,2 M0,0 l8,8 M7,-1 l2,2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-1)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="2" data-col="2" data-row="0">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-2" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-2)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="3" data-col="3" data-row="0">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-3" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,7 l2,2 M0,0 l8,8 M7,-1 l2,2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-3)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="4" data-col="4" data-row="0">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-4" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-4)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="5" data-col="5" data-row="0">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-5" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,7 l2,2 M0,0 l8,8 M7,-1 l2,2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-5)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="6" data-col="0" data-row="1">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-6" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,7 l2,2 M0,0 l8,8 M7,-1 l2,2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-6)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="7" data-col="1" data-row="1">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-7" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-7)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="8" data-col="2" data-row="1">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-8" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,7 l2,2 M0,0 l8,8 M7,-1 l2,2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-8)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="9" data-col="3" data-row="1">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-9" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-9)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="10" data-col="4" data-row="1">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-10" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,7 l2,2 M0,0 l8,8 M7,-1 l2,2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-10)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="11" data-col="5" data-row="1">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-11" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-11)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="12" data-col="0" data-row="2">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-12" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-12)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="13" data-col="1" data-row="2">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-13" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,7 l2,2 M0,0 l8,8 M7,-1 l2,2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-13)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="14" data-col="2" data-row="2">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-14" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-14)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="15" data-col="3" data-row="2">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-15" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,7 l2,2 M0,0 l8,8 M7,-1 l2,2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-15)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="16" data-col="4" data-row="2">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-16" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,1 l2,-2 M0,8 l8,-8 M7,9 l2,-2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-16)"></rect>
+              </svg>
+            </div>
+            <div class="pulse-cell" data-index="17" data-col="5" data-row="2">
+              <svg class="pulse-svg" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="hatch-pat-17" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <path d="M-1,7 l2,2 M0,0 l8,8 M7,-1 l2,2" stroke="currentColor" stroke-width="1"></path>
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#hatch-pat-17)"></rect>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Coordinate Intersection Nodes (28 Nodes at Line Crossings) -->
+          <div class="bklit-dots-layer" aria-hidden="true">
+            <span class="bklit-dot" style="left:0.000%;top:0.000%;"></span>
+            <span class="bklit-dot" style="left:16.667%;top:0.000%;"></span>
+            <span class="bklit-dot" style="left:33.333%;top:0.000%;"></span>
+            <span class="bklit-dot" style="left:50.000%;top:0.000%;"></span>
+            <span class="bklit-dot" style="left:66.667%;top:0.000%;"></span>
+            <span class="bklit-dot" style="left:83.333%;top:0.000%;"></span>
+            <span class="bklit-dot" style="left:100.000%;top:0.000%;"></span>
+            <span class="bklit-dot" style="left:0.000%;top:33.333%;"></span>
+            <span class="bklit-dot" style="left:16.667%;top:33.333%;"></span>
+            <span class="bklit-dot" style="left:33.333%;top:33.333%;"></span>
+            <span class="bklit-dot" style="left:50.000%;top:33.333%;"></span>
+            <span class="bklit-dot" style="left:66.667%;top:33.333%;"></span>
+            <span class="bklit-dot" style="left:83.333%;top:33.333%;"></span>
+            <span class="bklit-dot" style="left:100.000%;top:33.333%;"></span>
+            <span class="bklit-dot" style="left:0.000%;top:66.667%;"></span>
+            <span class="bklit-dot" style="left:16.667%;top:66.667%;"></span>
+            <span class="bklit-dot" style="left:33.333%;top:66.667%;"></span>
+            <span class="bklit-dot" style="left:50.000%;top:66.667%;"></span>
+            <span class="bklit-dot" style="left:66.667%;top:66.667%;"></span>
+            <span class="bklit-dot" style="left:83.333%;top:66.667%;"></span>
+            <span class="bklit-dot" style="left:100.000%;top:66.667%;"></span>
+            <span class="bklit-dot" style="left:0.000%;top:100.000%;"></span>
+            <span class="bklit-dot" style="left:16.667%;top:100.000%;"></span>
+            <span class="bklit-dot" style="left:33.333%;top:100.000%;"></span>
+            <span class="bklit-dot" style="left:50.000%;top:100.000%;"></span>
+            <span class="bklit-dot" style="left:66.667%;top:100.000%;"></span>
+            <span class="bklit-dot" style="left:83.333%;top:100.000%;"></span>
+            <span class="bklit-dot" style="left:100.000%;top:100.000%;"></span>
+          </div>
+
+          <!-- Hero Content Overlay Layer (Fluid Wide Responsive Positioning) -->
+          <div class="bklit-content-layer">
+            <!-- Top: Interactive Pill Announcement -->
+            <div class="bklit-pill-row">
+              <a href="#about" class="bklit-pill">
+                <span class="pill-tag">BRANCH 06261</span>
+                <span class="pill-title">Region 10 Bangalore Section &rarr;</span>
+              </a>
+              <button type="button" class="bklit-pill-play" id="hero-quick-open" aria-label="Branch Overview">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+              </button>
+            </div>
+
+            <!-- Center: Bold Title, Monospace Subtitle & Action Button -->
+            <div class="bklit-title-block">
+              <h1 class="bklit-title">BMSCE IEEE</h1>
+              <p class="bklit-subtitle">ADVANCING TECHNOLOGICAL INNOVATION &amp; STUDENT RESEARCH<span class="animate-caret-blink">_</span></p>
+              <div class="bklit-cta-wrap">
+                <a href="#chapters" class="bklit-button">Get started</a>
+              </div>
+            </div>
+
+            <!-- Bottom: Delta Affiliation Stamp in Row 3 Col 1 -->
+            <div class="bklit-bottom-row">
+              <div class="bklit-stamp">
+                <svg width="24" height="22" viewBox="0 0 24 20" fill="currentColor">
+                  <polygon points="12 1 23 19 1 19"></polygon>
+                </svg>
+                <div class="stamp-meta">
+                  <div class="stamp-title">BMSCE COLLEGE OF ENG. &nbsp;// &nbsp;2026</div>
+                  <div class="stamp-sub">IEEE BANGALORE SECTION &middot; REGION 10 PROGRAM</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Trust & Chapters Strip -->
+        <div class="bklit-trusted-section">
+          <p class="trusted-heading">AFFILIATED SOCIETIES &amp; GLOBAL CHAPTERS<span class="animate-caret-blink">_</span></p>
+          <div class="trusted-row">
+            <span>IEEE COMPUTER SOCIETY</span>
+            <span class="dot">&middot;</span>
+            <span>POWER &amp; ENERGY SOCIETY</span>
+            <span class="dot">&middot;</span>
+            <span>PELS &amp; IES JOINT CHAPTER</span>
+            <span class="dot">&middot;</span>
+            <span>WOMEN IN ENGINEERING</span>
+            <span class="dot">&middot;</span>
+            <span>IEEE SSIT</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Society Chapters (Asymmetric Bento Grid) -->
+    <section class="section chapters-section" id="chapters">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Society Chapters &amp; Affinity Groups</h2>
+          <p class="section-description">
+            Dedicated engineering verticals providing student developers, hardware designers, and researchers with focused domains, mentorship, and international resources.
+          </p>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Bento Card 1: Computer Society (Featured Wide) -->
+          <article class="bento-card bento-wide reveal-card" data-chapter="cs">
+            <div class="bento-card-top">
+              <span class="pastel-badge badge-blue">IEEE CS &middot; CHAPTER</span>
+              <span class="bento-serial">01</span>
+            </div>
+            <div class="bento-card-body">
+              <h3 class="bento-title">IEEE Computer Society</h3>
+              <p class="bento-text">
+                Fostering software engineering, algorithmic design, artificial intelligence, and open systems. Hosts the 24-hour IEEEXtreme hackathons, developer bootcamps, and technical sprints.
+              </p>
+              <div class="chapter-specs">
+                <div class="spec-row">
+                  <span class="spec-label">Core Tracks:</span>
+                  <span class="spec-value">Systems, Web Architectures, AI/ML</span>
+                </div>
+                <div class="spec-row">
+                  <span class="spec-label">Next Event:</span>
+                  <span class="spec-value">IEEEXtreme 19.0 Prep Sprint</span>
+                </div>
+              </div>
+            </div>
+            <div class="bento-card-footer">
+              <button type="button" class="btn-text open-registration-btn" data-event-title="IEEEXtreme 19.0 Prep Sprint" data-chapter="Computer Society">
+                Register for Event &rarr;
+              </button>
+            </div>
+          </article>
+
+          <!-- Bento Card 2: Power & Energy Society (PES) -->
+          <article class="bento-card reveal-card" data-chapter="pes">
+            <div class="bento-card-top">
+              <span class="pastel-badge badge-green">IEEE PES &middot; CHAPTER</span>
+              <span class="bento-serial">02</span>
+            </div>
+            <div class="bento-card-body">
+              <h3 class="bento-title">Power &amp; Energy Society</h3>
+              <p class="bento-text">
+                Specializing in renewable microgrids, energy storage technology, power distribution systems, and intelligent sensor networks.
+              </p>
+              <div class="chapter-specs">
+                <div class="spec-row">
+                  <span class="spec-label">Focus:</span>
+                  <span class="spec-value">Clean Tech, Smart Grids</span>
+                </div>
+              </div>
+            </div>
+            <div class="bento-card-footer">
+              <button type="button" class="btn-text open-registration-btn" data-event-title="Clean Energy Grid Symposium" data-chapter="Power & Energy Society">
+                Register &rarr;
+              </button>
+            </div>
+          </article>
+
+          <!-- Bento Card 3: PELS & IES Joint Chapter -->
+          <article class="bento-card reveal-card" data-chapter="pels">
+            <div class="bento-card-top">
+              <span class="pastel-badge badge-yellow">PELS &amp; IES &middot; JOINT</span>
+              <span class="bento-serial">03</span>
+            </div>
+            <div class="bento-card-body">
+              <h3 class="bento-title">Power &amp; Industrial Electronics</h3>
+              <p class="bento-text">
+                Hands-on electronic prototyping, power converter topologies, semiconductor design, and industrial automation controls.
+              </p>
+              <div class="chapter-specs">
+                <div class="spec-row">
+                  <span class="spec-label">Focus:</span>
+                  <span class="spec-value">PCB Design, Drives, Automation</span>
+                </div>
+              </div>
+            </div>
+            <div class="bento-card-footer">
+              <button type="button" class="btn-text open-registration-btn" data-event-title="Hands-on PCB Prototyping Workshop" data-chapter="PELS & IES">
+                Register &rarr;
+              </button>
+            </div>
+          </article>
+
+          <!-- Bento Card 4: Women in Engineering (WIE) -->
+          <article class="bento-card reveal-card" data-chapter="wie">
+            <div class="bento-card-top">
+              <span class="pastel-badge badge-red">IEEE WIE &middot; AFFINITY</span>
+              <span class="bento-serial">04</span>
+            </div>
+            <div class="bento-card-body">
+              <h3 class="bento-title">Women in Engineering</h3>
+              <p class="bento-text">
+                A globally affiliated community empowering female technologists through skill intensives, executive mentorship, and research grants.
+              </p>
+              <div class="chapter-specs">
+                <div class="spec-row">
+                  <span class="spec-label">Focus:</span>
+                  <span class="spec-value">Leadership, STEM Outreach</span>
+                </div>
+              </div>
+            </div>
+            <div class="bento-card-footer">
+              <button type="button" class="btn-text open-registration-btn" data-event-title="WIE Leadership & Tech Summit" data-chapter="Women in Engineering">
+                Register &rarr;
+              </button>
+            </div>
+          </article>
+
+          <!-- Bento Card 5: SSIT -->
+          <article class="bento-card reveal-card" data-chapter="ssit">
+            <div class="bento-card-top">
+              <span class="pastel-badge badge-neutral">IEEE SSIT &middot; CHAPTER</span>
+              <span class="bento-serial">05</span>
+            </div>
+            <div class="bento-card-body">
+              <h3 class="bento-title">Social Implications of Tech</h3>
+              <p class="bento-text">
+                Investigating engineering ethics, AI regulation, technological sustainability, and civic technology for humanitarian progress.
+              </p>
+              <div class="chapter-specs">
+                <div class="spec-row">
+                  <span class="spec-label">Focus:</span>
+                  <span class="spec-value">Tech Ethics, Sustainable Policy</span>
+                </div>
+              </div>
+            </div>
+            <div class="bento-card-footer">
+              <button type="button" class="btn-text open-registration-btn" data-event-title="Ethics in Algorithmic Governance" data-chapter="SSIT">
+                Register &rarr;
+              </button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Flagship Events & On-Page Registration -->
+    <section class="section events-section" id="events">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title">Flagship Events &amp; Active Schedules</h2>
+          <p class="section-description">
+            Participate in regional symposia, 24-hour coding hackathons, and technical workshops organized directly by our chapters.
+          </p>
+        </div>
+
+        <div class="events-layout">
+          <!-- Left: Featured Flagship -->
+          <div class="event-spotlight reveal-card">
+            <div class="spotlight-media">
+              <img src="assets/hackathon.jpg" alt="IEEEXtreme programming contest collaboration" class="spotlight-img">
+              <span class="spotlight-badge">GLOBAL CONTEST</span>
+            </div>
+            <div class="spotlight-details">
+              <div class="event-meta">
+                <span class="event-date">OCTOBER 2026 &middot; 24-HOUR CONTINUOUS</span>
+                <span class="event-venue">BMSCE LABS &amp; VIRTUAL</span>
+              </div>
+              <h3 class="spotlight-title">IEEEXtreme 19.0 Global Hackathon</h3>
+              <p class="spotlight-desc">
+                The worldwide virtual competitive programming challenge pitting university engineering teams against real-time algorithmic problems across a 24-hour marathon.
+              </p>
+              <div class="spotlight-action">
+                <button type="button" class="btn btn-primary open-registration-btn" data-event-title="IEEEXtreme 19.0 Global Hackathon" data-chapter="Computer Society">
+                  Reserve Team Seat
+                </button>
+                <span class="spotlight-note">Open to all active IEEE student members</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Compact Event Schedule List -->
+          <div class="events-list">
+            <!-- Event Item 1 -->
+            <article class="event-item reveal-card">
+              <div class="event-item-date">
+                <span class="day">12</span>
+                <span class="month">OCT</span>
+              </div>
+              <div class="event-item-info">
+                <div class="event-tags">
+                  <span class="pastel-badge badge-blue">CS &middot; SIG</span>
+                  <span class="event-time">14:00 - 17:30 IST</span>
+                </div>
+                <h4 class="event-item-title">Systems Programming &amp; Low-Level Runtime Sprint</h4>
+                <p class="event-item-desc">Interactive session on memory architecture, kernel primitives, and high-performance computation.</p>
+              </div>
+              <div class="event-item-action">
+                <button type="button" class="btn btn-outline btn-sm open-registration-btn" data-event-title="Systems Programming & Low-Level Runtime Sprint" data-chapter="Computer Society">
+                  Register
+                </button>
+              </div>
+            </article>
+
+            <!-- Event Item 2 -->
+            <article class="event-item reveal-card">
+              <div class="event-item-date">
+                <span class="day">28</span>
+                <span class="month">OCT</span>
+              </div>
+              <div class="event-item-info">
+                <div class="event-tags">
+                  <span class="pastel-badge badge-yellow">PELS &middot; WORKSHOP</span>
+                  <span class="event-time">10:00 - 16:00 IST</span>
+                </div>
+                <h4 class="event-item-title">High-Frequency PCB Layout &amp; Signal Integrity</h4>
+                <p class="event-item-desc">Hardware design workshop utilizing industrial CAD tools, schematic capture, and impedance matching.</p>
+              </div>
+              <div class="event-item-action">
+                <button type="button" class="btn btn-outline btn-sm open-registration-btn" data-event-title="High-Frequency PCB Layout Workshop" data-chapter="PELS & IES">
+                  Register
+                </button>
+              </div>
+            </article>
+
+            <!-- Event Item 3 -->
+            <article class="event-item reveal-card">
+              <div class="event-item-date">
+                <span class="day">08</span>
+                <span class="month">NOV</span>
+              </div>
+              <div class="event-item-info">
+                <div class="event-tags">
+                  <span class="pastel-badge badge-red">WIE &middot; FORUM</span>
+                  <span class="event-time">15:00 - 18:00 IST</span>
+                </div>
+                <h4 class="event-item-title">Women in Technical Leadership: Industry Colloquium</h4>
+                <p class="event-item-desc">Keynote addresses and panel interactions with engineering directors from Bangalore's semiconductor hub.</p>
+              </div>
+              <div class="event-item-action">
+                <button type="button" class="btn btn-outline btn-sm open-registration-btn" data-event-title="Women in Technical Leadership Colloquium" data-chapter="Women in Engineering">
+                  Register
+                </button>
+              </div>
+            </article>
+
+            <!-- Event Item 4 -->
+            <article class="event-item reveal-card">
+              <div class="event-item-date">
+                <span class="day">19</span>
+                <span class="month">NOV</span>
+              </div>
+              <div class="event-item-info">
+                <div class="event-tags">
+                  <span class="pastel-badge badge-green">PES &middot; SEMINAR</span>
+                  <span class="event-time">11:00 - 13:30 IST</span>
+                </div>
+                <h4 class="event-item-title">Autonomous Microgrids &amp; Grid-Tie Inverters</h4>
+                <p class="event-item-desc">Technical presentation on distributed renewable energy generation and synchronization challenges.</p>
+              </div>
+              <div class="event-item-action">
+                <button type="button" class="btn btn-outline btn-sm open-registration-btn" data-event-title="Autonomous Microgrids Seminar" data-chapter="Power & Energy Society">
+                  Register
+                </button>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Branch Heritage & Affiliation -->
+    <section class="section about-section" id="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-text-col">
+            <h2 class="section-title">Institutional Heritage &amp; Bangalore Section</h2>
+            <p class="body-text">
+              Established in 2009 under IEEE Region 10 (Asia-Pacific) and the IEEE Bangalore Section, the BMSCE IEEE Student Branch operates within B.M.S. College of Engineering—one of India's earliest engineering institutions founded in 1946.
+            </p>
+            <p class="body-text">
+              Our branch bridges foundational engineering rigor with contemporary industrial research. Through peer-led Special Interest Groups (SIGs), national symposiums, and community outreach, our members consistently publish in IEEE Xplore, secure regional hackathon podiums, and lead technology initiatives across academia.
+            </p>
+            <div class="branch-meta-box">
+              <div class="meta-row">
+                <span class="meta-title">Branch Code</span>
+                <span class="meta-code">06261 &middot; IEEE Region 10</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-title">Parent Section</span>
+                <span class="meta-code">IEEE Bangalore Section</span>
+              </div>
+              <div class="meta-row">
+                <span class="meta-title">Faculty Counselor</span>
+                <span class="meta-code">Department of Electrical &amp; Electronics Engineering, BMSCE</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-stats-col">
+            <div class="stats-card">
+              <h3 class="stats-card-title">Student Branch Pillars</h3>
+              <ul class="pillars-list">
+                <li class="pillar-item">
+                  <span class="pillar-num">01</span>
+                  <div class="pillar-content">
+                    <h4>Technical Rigor</h4>
+                    <p>Hands-on engineering workshops, hardware prototyping labs, and collaborative software projects.</p>
+                  </div>
+                </li>
+                <li class="pillar-item">
+                  <span class="pillar-num">02</span>
+                  <div class="pillar-content">
+                    <h4>Global Community</h4>
+                    <p>Direct connectivity to IEEE Xplore digital library, international student competitions, and travel grants.</p>
+                  </div>
+                </li>
+                <li class="pillar-item">
+                  <span class="pillar-num">03</span>
+                  <div class="pillar-content">
+                    <h4>Ethical Responsibility</h4>
+                    <p>Interdisciplinary inquiry into technology ethics, public welfare applications, and clean sustainable energy.</p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Slide-Out Event Registration Drawer -->
+  <div class="drawer-backdrop" id="drawer-backdrop" aria-hidden="true"></div>
+  <aside class="registration-drawer" id="registration-drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true">
+    <div class="drawer-header">
+      <div>
+        <span class="drawer-subtitle">EVENT REGISTRATION</span>
+        <h3 class="drawer-title" id="drawer-title">Register for Event</h3>
+      </div>
+      <button type="button" class="btn-close" id="close-drawer-btn" aria-label="Close registration drawer">&times;</button>
+    </div>
+
+    <div class="drawer-body">
+      <form id="event-registration-form" class="registration-form" novalidate>
+        <div class="form-group">
+          <label for="reg-event" class="form-label">Selected Event</label>
+          <input type="text" id="reg-event" name="eventName" class="form-input" readonly value="IEEEXtreme 19.0 Global Hackathon">
+        </div>
+
+        <div class="form-group">
+          <label for="reg-chapter" class="form-label">Host Chapter / Track</label>
+          <input type="text" id="reg-chapter" name="chapterName" class="form-input" readonly value="Computer Society">
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reg-name" class="form-label">Full Name <span class="required">*</span></label>
+            <input type="text" id="reg-name" name="fullName" class="form-input" placeholder="e.g., Ananya Sharma" required>
+            <span class="error-msg" id="name-error"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-usn" class="form-label">College USN <span class="required">*</span></label>
+            <input type="text" id="reg-usn" name="usn" class="form-input" placeholder="e.g., 1BM23CS042" required>
+            <span class="error-msg" id="usn-error"></span>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="reg-email" class="form-label">Institutional Email <span class="required">*</span></label>
+          <input type="email" id="reg-email" name="email" class="form-input" placeholder="name.cs23@bmsce.ac.in" required>
+          <span class="error-msg" id="email-error"></span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="reg-branch" class="form-label">Department / Branch</label>
+            <select id="reg-branch" name="department" class="form-select">
+              <option value="CSE">Computer Science &amp; Engineering</option>
+              <option value="ISE">Information Science &amp; Engineering</option>
+              <option value="ECE">Electronics &amp; Communication</option>
+              <option value="EEE">Electrical &amp; Electronics</option>
+              <option value="AIML">Artificial Intelligence &amp; ML</option>
+              <option value="MECH">Mechanical Engineering</option>
+              <option value="OTHER">Other Academic Department</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="reg-membership" class="form-label">IEEE Member ID</label>
+            <input type="text" id="reg-membership" name="membershipId" class="form-input" placeholder="Optional (if member)">
+          </div>
+        </div>
+
+        <div class="form-footer">
+          <button type="submit" class="btn btn-primary btn-block" id="submit-reg-btn">Complete Registration</button>
+          <p class="form-disclaimer">Instant confirmation token generated upon submission. No external redirects required.</p>
+        </div>
+      </form>
+
+      <!-- Success State Confirmation View -->
+      <div class="confirmation-view" id="confirmation-view" hidden>
+        <div class="confirmation-icon">&#10003;</div>
+        <h4 class="confirmation-title">Registration Confirmed</h4>
+        <p class="confirmation-desc">Your seat has been reserved. A confirmation copy has been logged to the branch database.</p>
+        
+        <div class="token-receipt">
+          <div class="receipt-row">
+            <span class="receipt-label">Reference ID</span>
+            <code class="receipt-code" id="receipt-id">IEEE-BMSCE-8492</code>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-label">Participant</span>
+            <span class="receipt-value" id="receipt-name">-</span>
+          </div>
+          <div class="receipt-row">
+            <span class="receipt-label">Registered Event</span>
+            <span class="receipt-value" id="receipt-event">-</span>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-secondary btn-block" id="reset-reg-btn">Register for Another Event</button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand-col">
+        <span class="footer-brand-title">BMSCE IEEE Student Branch</span>
+        <p class="footer-brand-sub">
+          B.M.S. College of Engineering, Bull Temple Road, Basavanagudi, Bengaluru 560019, Karnataka, India.
+        </p>
+        <div class="footer-status-pill">
+          <span class="status-dot"></span>
+          <span>BRANCH CODE: 06261 &middot; REGION 10 ACTIVE</span>
+        </div>
+      </div>
+
+      <div class="footer-links-grid">
+        <div class="footer-col">
+          <h5 class="footer-heading">SOCIETIES</h5>
+          <ul class="footer-list">
+            <li><a href="#chapters">Computer Society</a></li>
+            <li><a href="#chapters">Power &amp; Energy Society</a></li>
+            <li><a href="#chapters">PELS &amp; IES Chapter</a></li>
+            <li><a href="#chapters">Women in Engineering</a></li>
+            <li><a href="#chapters">SSIT Chapter</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5 class="footer-heading">BRANCH LINKS</h5>
+          <ul class="footer-list">
+            <li><a href="#events">Event Calendar</a></li>
+            <li><a href="#about">Executive Committee</a></li>
+            <li><a href="https://www.ieee.org" target="_blank" rel="noopener">IEEE.org</a></li>
+            <li><a href="https://ieeebangalore.org" target="_blank" rel="noopener">IEEE Bangalore Section</a></li>
+            <li><a href="https://www.bmsce.ac.in" target="_blank" rel="noopener">BMSCE Official Portal</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <p class="copyright">&copy; 2026 BMSCE IEEE Student Branch. Built with utilitarian minimalist editorial aesthetics.</p>
+        <p class="footer-note">Affiliated with IEEE Region 10 &middot; Non-profit academic technical branch.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js?v=2.5"></script>
+</body>
+</html>
