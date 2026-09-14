@@ -22,7 +22,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600&family=Geist:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=2.5">
+  <link rel="stylesheet" href="styles.css?v=3.0">
 </head>
 <body>
 
@@ -348,35 +348,44 @@
 
           <!-- Hero Content Overlay Layer (Fluid Wide Responsive Positioning) -->
           <div class="bklit-content-layer">
-            <!-- Top: Interactive Pill Announcement -->
-            <div class="bklit-pill-row">
-              <a href="#about" class="bklit-pill">
-                <span class="pill-tag">BRANCH 06261</span>
-                <span class="pill-title">Region 10 Bangalore Section &rarr;</span>
-              </a>
-              <button type="button" class="bklit-pill-play" id="hero-quick-open" aria-label="Branch Overview">
-                <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-              </button>
-            </div>
-
-            <!-- Center: Bold Title, Monospace Subtitle & Action Button -->
-            <div class="bklit-title-block">
-              <h1 class="bklit-title">BMSCE IEEE</h1>
-              <p class="bklit-subtitle">ADVANCING TECHNOLOGICAL INNOVATION &amp; STUDENT RESEARCH<span class="animate-caret-blink">_</span></p>
-              <div class="bklit-cta-wrap">
-                <a href="#chapters" class="bklit-button">Get started</a>
+            <div class="bklit-main-group">
+              <!-- Top: Interactive Pill Announcement with Particle Sparkles (bklit.com 1:1) -->
+              <div class="bklit-pill-row">
+                <div class="studio-pill-container">
+                  <div class="studio-pill-canvas-wrap" aria-hidden="true">
+                    <canvas id="pill-particle-canvas"></canvas>
+                  </div>
+                  <div class="studio-pill-wrapper">
+                    <a href="#about" class="bklit-pill" aria-label="BMSCE IEEE Branch 06261 · Region 10">
+                      <span class="pill-tag">BRANCH 06261</span>
+                      <span class="pill-title"><span class="shimmer-text">Region 10 Bangalore Section</span> <span class="pill-arrow">&rarr;</span></span>
+                    </a>
+                  </div>
+                </div>
+                <button type="button" class="bklit-pill-play" id="hero-quick-open" aria-label="Play Branch Video" title="Play Branch Video">
+                  <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                </button>
               </div>
-            </div>
 
-            <!-- Bottom: Delta Affiliation Stamp in Row 3 Col 1 -->
-            <div class="bklit-bottom-row">
-              <div class="bklit-stamp">
-                <svg width="24" height="22" viewBox="0 0 24 20" fill="currentColor">
-                  <polygon points="12 1 23 19 1 19"></polygon>
-                </svg>
-                <div class="stamp-meta">
-                  <div class="stamp-title">BMSCE COLLEGE OF ENG. &nbsp;// &nbsp;2026</div>
-                  <div class="stamp-sub">IEEE BANGALORE SECTION &middot; REGION 10 PROGRAM</div>
+              <!-- Center: Bold Title, Monospace Subtitle & Action Button -->
+              <div class="bklit-title-block">
+                <h1 class="bklit-title">BMSCE IEEE</h1>
+                <p class="bklit-subtitle">ADVANCING TECHNOLOGICAL INNOVATION &amp; STUDENT RESEARCH<span class="animate-caret-blink">_</span></p>
+                <div class="bklit-cta-wrap">
+                  <a href="#chapters" class="bklit-button">Get started</a>
+                </div>
+              </div>
+
+              <!-- Bottom: Delta Affiliation Stamp -->
+              <div class="bklit-bottom-row">
+                <div class="bklit-stamp">
+                  <svg width="22" height="20" viewBox="0 0 24 20" fill="currentColor">
+                    <polygon points="12 1 23 19 1 19"></polygon>
+                  </svg>
+                  <div class="stamp-meta">
+                    <div class="stamp-title">BMSCE COLLEGE OF ENG. &nbsp;// &nbsp;2026</div>
+                    <div class="stamp-sub">IEEE BANGALORE SECTION &middot; REGION 10 PROGRAM</div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -825,6 +834,24 @@
     </div>
   </aside>
 
+  <!-- In-Page YouTube Video Modal (bklit.com 1:1) -->
+  <div id="video-modal-root" class="video-modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Branch YouTube Video" hidden>
+    <div class="video-modal-backdrop" id="video-modal-backdrop" tabindex="-1"></div>
+    <div class="video-modal-container">
+      <div class="video-modal-card">
+        <button type="button" class="video-modal-close" id="video-modal-close" aria-label="Close video">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+        <div class="video-responsive-frame" id="video-iframe-container">
+          <!-- Dynamic YouTube iframe injected on open -->
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Site Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
@@ -872,6 +899,6 @@
     </div>
   </footer>
 
-  <script src="main.js?v=2.5"></script>
+  <script src="main.js?v=3.0"></script>
 </body>
 </html>

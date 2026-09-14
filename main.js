@@ -6,6 +6,8 @@
 document.addEventListener('DOMContentLoaded', () => {
   initThemeToggle();
   initGridCellPulse();
+  initPillSparkles();
+  initVideoModal();
   initScrollReveals();
   initRegistrationDrawer();
   initKeyboardShortcuts();
@@ -303,5 +305,188 @@ function initGridCellPulse() {
       hoveredCell = null;
     });
   }
+}
+
+/**
+ * Luminous Particle Sparkles around the Studio Pill Badge (bklit.com 1:1)
+ * Emits tiny floating particle stars around the 4 borders of the pill
+ */
+function initPillSparkles() {
+  const canvas = document.getElementById('pill-particle-canvas');
+  const container = document.querySelector('.studio-pill-container');
+  const pillWrapper = document.querySelector('.studio-pill-wrapper');
+  if (!canvas || !container || !pillWrapper) return;
+
+  const ctx = canvas.getContext('2d');
+  let animationFrame;
+  let particles = [];
+  let isHovered = false;
+
+  function resize() {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = canvas.getBoundingClientRect();
+    if (rect.width <= 0 || rect.height <= 0) return;
+    canvas.width = Math.round(rect.width * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+  }
+
+  window.addEventListener('resize', resize);
+  setTimeout(resize, 50);
+
+  function spawnParticle() {
+    if (particles.length > 120) return;
+    const pillRect = pillWrapper.getBoundingClientRect();
+    const canvasRect = canvas.getBoundingClientRect();
+
+    const x = pillRect.left - canvasRect.left;
+    const y = pillRect.top - canvasRect.top;
+    const w = pillRect.width;
+    const h = pillRect.height;
+
+    let px, py;
+    const side = Math.floor(Math.random() * 4);
+    if (side === 0) {
+      px = x + Math.random() * w;
+      py = y;
+    } else if (side === 1) {
+      px = x + w;
+      py = y + Math.random() * h;
+    } else if (side === 2) {
+      px = x + Math.random() * w;
+      py = y + h;
+    } else {
+      px = x;
+      py = y + Math.random() * h;
+    }
+
+    const colors = [
+      'rgba(0, 163, 224, ',
+      'rgba(59, 130, 246, ',
+      'rgba(147, 197, 253, ',
+      'rgba(255, 255, 255, '
+    ];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    particles.push({
+      x: px,
+      y: py,
+      vx: (Math.random() - 0.5) * 0.7,
+      vy: -Math.random() * 0.7 - 0.15,
+      size: Math.random() * 1.6 + 0.8,
+      life: 0,
+      maxLife: 35 + Math.random() * 40,
+      color: color
+    });
+  }
+
+  pillWrapper.addEventListener('mouseenter', () => {
+    isHovered = true;
+    for (let i = 0; i < 10; i++) spawnParticle();
+  });
+
+  pillWrapper.addEventListener('mouseleave', () => {
+    isHovered = false;
+  });
+
+  let tick = 0;
+  function animate() {
+    tick++;
+    const rect = canvas.getBoundingClientRect();
+    ctx.clearRect(0, 0, rect.width, rect.height);
+
+    if (tick % (isHovered ? 2 : 4) === 0) {
+      spawnParticle();
+      if (isHovered) spawnParticle();
+    }
+
+    for (let i = particles.length - 1; i >= 0; i--) {
+      const p = particles[i];
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vx *= 0.985;
+      p.vy *= 0.985;
+      p.life++;
+
+      const progress = p.life / p.maxLife;
+      if (progress >= 1) {
+        particles.splice(i, 1);
+        continue;
+      }
+
+      const alpha = progress < 0.25 ? progress / 0.25 : (1 - progress) * 0.9;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.size * (1 - progress * 0.25), 0, Math.PI * 2);
+      ctx.fillStyle = p.color + alpha + ')';
+      ctx.shadowBlur = 3;
+      ctx.shadowColor = p.color + '0.8)';
+      ctx.fill();
+    }
+
+    animationFrame = requestAnimationFrame(animate);
+  }
+
+  animate();
+}
+
+/**
+ * In-Page YouTube Video Player Modal (bklit.com 1:1)
+ * Plays https://youtu.be/PnhLG43EC6c in an ambient blurred modal without redirecting
+ */
+function initVideoModal() {
+  const playBtn = document.getElementById('hero-quick-open');
+  const modal = document.getElementById('video-modal-root');
+  const backdrop = document.getElementById('video-modal-backdrop');
+  const closeBtn = document.getElementById('video-modal-close');
+  const iframeContainer = document.getElementById('video-iframe-container');
+  if (!playBtn || !modal || !iframeContainer) return;
+
+  const videoId = 'PnhLG43EC6c';
+
+  function openVideo() {
+    iframeContainer.innerHTML = `
+      <iframe 
+        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" 
+        title="BMSCE IEEE Branch Video" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+        allowfullscreen>
+      </iframe>
+    `;
+
+    modal.hidden = false;
+    modal.setAttribute('aria-hidden', 'false');
+    void modal.offsetWidth;
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeVideo() {
+    modal.classList.remove('is-open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+
+    setTimeout(() => {
+      if (!modal.classList.contains('is-open')) {
+        iframeContainer.innerHTML = '';
+        modal.hidden = true;
+      }
+    }, 280);
+  }
+
+  playBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    openVideo();
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeVideo);
+  if (backdrop) backdrop.addEventListener('click', closeVideo);
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('is-open')) {
+      closeVideo();
+    }
+  });
 }
 
