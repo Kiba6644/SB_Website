@@ -1753,6 +1753,8 @@ html:not(.dark) .bklit-dot {
 .reveal-card.is-visible {
   opacity: 1;
   transform: translateY(0);
+}
+
 /* ==========================================================================
    YouTube In-Page Video Modal (bklit.com 1:1)
    ========================================================================== */
@@ -1760,13 +1762,13 @@ html:not(.dark) .bklit-dot {
 .video-modal-overlay {
   position: fixed;
   inset: 0;
-  z-index: 1000;
+  z-index: 99999;
   display: flex;
   align-items: center;
   justify-content: center;
   visibility: hidden;
   opacity: 0;
-  transition: opacity 0.28s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.28s;
+  transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.25s;
 }
 
 .video-modal-overlay.is-open {
@@ -1837,7 +1839,26 @@ html:not(.dark) .bklit-dot {
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9;
-  background: #000;
+  background: #09090b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-spinner {
+  position: absolute;
+  width: 36px;
+  height: 36px;
+  border: 2.5px solid rgba(255, 255, 255, 0.15);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: video-spin 0.8s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes video-spin {
+  to { transform: rotate(360deg); }
 }
 
 .video-responsive-frame iframe {
@@ -1846,6 +1867,8 @@ html:not(.dark) .bklit-dot {
   width: 100%;
   height: 100%;
   border: 0;
+  z-index: 2;
+  background: transparent;
 }
 
 /* ==========================================================================
@@ -1890,8 +1913,37 @@ html:not(.dark) .bklit-dot {
     display: none;
   }
 
+  /* Compact Mobile Single-Line Header */
+  .site-header {
+    height: 52px;
+  }
+
+  .brand-badge {
+    display: none;
+  }
+
+  .kbd-trigger {
+    display: none;
+  }
+
+  .header-actions {
+    gap: 8px;
+  }
+
+  .theme-toggle-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .header-actions .btn {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+
+  /* Compact Bklit Hero Blueprint on Mobile (Exact 3x2 Proportions, 260px Height) */
   .bklit-landing-section {
-    padding-top: 24px;
+    padding-top: 18px;
+    padding-bottom: 8px;
   }
 
   .bklit-ruler-axis {
@@ -1905,19 +1957,34 @@ html:not(.dark) .bklit-dot {
   }
 
   .bklit-grid-box {
-    height: auto;
-    min-height: 480px;
-    display: flex;
-    flex-direction: column;
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    max-height: 290px;
+    background-color: var(--color-canvas);
+    position: relative;
   }
 
   .bklit-grid-lines {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
   }
 
-  .bklit-grid-lines .grid-col:nth-child(n+10) {
+  .bklit-grid-lines .grid-col:nth-child(n+7) {
+    display: none;
+  }
+
+  .bklit-pulse-layer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+
+  .bklit-pulse-layer .pulse-cell:nth-child(n+7) {
+    display: none;
+  }
+
+  .bklit-dots-layer {
     display: none;
   }
 
@@ -1928,31 +1995,115 @@ html:not(.dark) .bklit-dot {
   }
 
   .bklit-content-layer {
-    position: relative;
-    padding: 32px 20px 28px;
-    gap: 32px;
+    position: absolute;
+    inset: 0;
+    padding: 0 6%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 5;
+  }
+
+  .bklit-main-group {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+  }
+
+  .bklit-pill-row {
+    gap: 6px;
+  }
+
+  .bklit-pill {
+    font-size: 10px;
+    padding: 2px 8px 2px 3px;
+  }
+
+  .pill-tag {
+    font-size: 8.5px;
+    padding: 1px 5px;
+  }
+
+  .bklit-pill-play {
+    width: 22px;
+    height: 22px;
   }
 
   .bklit-title-block {
-    margin-top: 0;
-    margin-bottom: 0;
+    margin: 0;
   }
 
   .bklit-title {
-    font-size: clamp(2.8rem, 11vw, 3.8rem);
-    line-height: 1;
-    white-space: normal;
+    font-size: clamp(1.85rem, 8vw, 2.35rem);
+    letter-spacing: -0.04em;
+    line-height: 0.95;
+    margin: 0 0 4px 0;
+    white-space: nowrap;
   }
 
   .bklit-subtitle {
-    font-size: 11px;
-    margin-bottom: 20px;
+    font-size: clamp(0.55rem, 2.2vw, 0.65rem);
+    letter-spacing: 0.12em;
+    line-height: 1.25;
+    margin: 0 0 6px 0;
+  }
+
+  .bklit-button {
+    font-size: 11.5px;
+    padding: 6px 14px;
+    border-radius: 5px;
+  }
+
+  .bklit-bottom-row {
+    margin-top: 2px;
+  }
+
+  .bklit-stamp {
+    gap: 8px;
+  }
+
+  .bklit-stamp svg {
+    width: 14px;
+    height: 13px;
+  }
+
+  .stamp-title {
+    font-size: 9px;
+    letter-spacing: 0.05em;
+  }
+
+  .stamp-sub {
+    font-size: 7.5px;
+    letter-spacing: 0.05em;
+  }
+
+  /* Compact Horizontal Inline Societies Strip on Mobile */
+  .bklit-trusted-section {
+    padding-top: 16px;
+    padding-bottom: 20px;
+  }
+
+  .trusted-heading {
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    margin-bottom: 8px;
   }
 
   .bklit-trusted-section .trusted-row {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 6px 10px;
+    font-size: 9.5px;
+    line-height: 1.4;
+  }
+
+  .bklit-trusted-section .trusted-row .dot {
+    display: inline;
+    opacity: 0.35;
   }
 
   .bento-grid {

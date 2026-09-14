@@ -444,22 +444,55 @@ function initVideoModal() {
   if (!playBtn || !modal || !iframeContainer) return;
 
   const videoId = 'PnhLG43EC6c';
+  let prewarmed = false;
+
+  function prewarmYouTube() {
+    if (prewarmed) return;
+    prewarmed = true;
+    const link1 = document.createElement('link');
+    link1.rel = 'preconnect';
+    link1.href = 'https://www.youtube-nocookie.com';
+    const link2 = document.createElement('link');
+    link2.rel = 'preconnect';
+    link2.href = 'https://i.ytimg.com';
+    document.head.appendChild(link1);
+    document.head.appendChild(link2);
+  }
+
+  playBtn.addEventListener('mouseenter', prewarmYouTube, { passive: true });
+  playBtn.addEventListener('touchstart', prewarmYouTube, { passive: true });
 
   function openVideo() {
+    prewarmYouTube();
+
+    modal.removeAttribute('hidden');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+
+    // Show loading spinner while YouTube initializes
     iframeContainer.innerHTML = `
+      <div class="video-spinner" id="video-spinner" aria-hidden="true"></div>
       <iframe 
-        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1" 
+        id="video-player-iframe"
+        src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&mute=0&playsinline=1&rel=0&modestbranding=1&enablejsapi=1" 
         title="BMSCE IEEE Branch Video" 
+        loading="eager"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
         allowfullscreen>
       </iframe>
     `;
 
-    modal.hidden = false;
-    modal.setAttribute('aria-hidden', 'false');
-    void modal.offsetWidth;
-    modal.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
+    const iframe = document.getElementById('video-player-iframe');
+    const spinner = document.getElementById('video-spinner');
+    if (iframe && spinner) {
+      iframe.addEventListener('load', () => {
+        spinner.style.display = 'none';
+      });
+    }
+
+    requestAnimationFrame(() => {
+      modal.classList.add('is-open');
+    });
   }
 
   function closeVideo() {
@@ -470,7 +503,7 @@ function initVideoModal() {
     setTimeout(() => {
       if (!modal.classList.contains('is-open')) {
         iframeContainer.innerHTML = '';
-        modal.hidden = true;
+        modal.setAttribute('hidden', '');
       }
     }, 280);
   }
