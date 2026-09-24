@@ -31,9 +31,15 @@ export default function RootLayout({
         </main>
 
         <footer className="bg-surface-dark border-t border-deep-navy/30 py-8 mt-20">
-          <div className="container mx-auto px-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-text-muted text-xs">
-            <p>&copy; {new Date().getFullYear()} BMSCE IEEE Student Branch. All rights reserved.</p>
-            <div className="flex items-center gap-4">
+          <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4 text-text-muted text-xs">
+            <p>&copy; {new Date().getFullYear()} BMSCE IEEE Student Branch (Branch 06261). All rights reserved.</p>
+            <div className="flex flex-wrap items-center justify-center gap-4">
+              <Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link>
+              <span>&bull;</span>
+              <Link href="/terms" className="hover:text-white transition-colors">Terms</Link>
+              <span>&bull;</span>
+              <Link href="/refund" className="hover:text-white transition-colors">Refund Policy</Link>
+              <span>&bull;</span>
               <Link href="/account" className="hover:text-white transition-colors">Member Portal</Link>
               <span>&bull;</span>
               <Link href="/admin/login" className="hover:text-sky-blue transition-colors font-medium">Executive Admin</Link>
