@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import Link from 'next/link';
 import AnnouncementBar from '@/components/AnnouncementBar';
+import Navbar from '@/components/Navbar';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -22,42 +23,8 @@ export default function RootLayout({
         {/* Dynamic Announcement Banner */}
         <AnnouncementBar />
 
-        {/* Global Navigation Header */}
-        <header className="sticky top-0 z-40 bg-bg-dark/80 backdrop-blur-md border-b border-surface-dark">
-          <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-            <Link href="/" className="flex items-center gap-2">
-              <span className="font-bold text-xl text-primary-orange">BMSCE IEEE</span>
-              <span className="hidden sm:inline-block text-xs font-medium px-2 py-1 bg-surface-dark rounded text-text-muted">
-                BRANCH 06261
-              </span>
-            </Link>
-            <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
-              <Link href="#chapters" className="hover:text-primary-orange transition-colors">Chapters</Link>
-              <Link href="#about" className="hover:text-primary-orange transition-colors">About</Link>
-            </nav>
-            <div className="flex items-center gap-2 sm:gap-3">
-              <Link
-                href="/admin/login"
-                className="text-xs text-sky-blue hover:text-white font-medium px-2.5 py-1.5 rounded-md hover:bg-surface-dark border border-sky-blue/30 transition-colors flex items-center gap-1"
-                title="Branch Executive Admin Portal"
-              >
-                <span>Admin</span>
-              </Link>
-              <Link
-                href="/membership/register"
-                className="text-xs text-text-muted hover:text-white font-medium px-2.5 py-1.5 rounded-md hover:bg-surface-dark transition-colors hidden sm:inline-block"
-              >
-                Member Sign In
-              </Link>
-              <Link
-                href="/membership/register"
-                className="bg-primary-orange hover:bg-orange-accent text-white px-3.5 py-1.5 rounded-md text-xs sm:text-sm font-semibold transition-colors shadow-sm shadow-primary-orange/20"
-              >
-                Become a Member
-              </Link>
-            </div>
-          </div>
-        </header>
+        {/* Global Responsive Navigation Header */}
+        <Navbar />
 
         <main className="flex-grow">
           {children}

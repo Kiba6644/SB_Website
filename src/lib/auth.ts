@@ -250,6 +250,28 @@ export function updateLocalOrderStatus(
   return null;
 }
 
+export function resubmitLocalOrderProof(orderId: string, screenshotUrl: string, utrReference?: string) {
+  if (typeof window !== 'undefined') {
+    const orders = getLocalOrders();
+    const updated = orders.map(ord => {
+      if (ord.id === orderId || ord.order_reference === orderId) {
+        return {
+          ...ord,
+          status: 'pending',
+          payment_screenshot_url: screenshotUrl,
+          utr_reference: utrReference || ord.utr_reference,
+          rejection_reason: undefined,
+          updated_at: new Date().toISOString(),
+        };
+      }
+      return ord;
+    });
+    localStorage.setItem(DUMMY_ORDERS_KEY, JSON.stringify(updated));
+    return updated.find(o => o.id === orderId || o.order_reference === orderId);
+  }
+  return null;
+}
+
 // Announcement Banner
 export function getAnnouncement(): Announcement {
   if (typeof window !== 'undefined') {

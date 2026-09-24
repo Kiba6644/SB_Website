@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
-import { getCurrentUser, getLocalProfile, getLocalOrders, clearUserSession } from '@/lib/auth';
-import { Loader2, Clock, CheckCircle2, XCircle, LogOut, ArrowRight, UserCheck, ShieldAlert } from 'lucide-react';
+import { getCurrentUser, getLocalProfile, getLocalOrders, clearUserSession, resubmitLocalOrderProof } from '@/lib/auth';
+import { Loader2, Clock, CheckCircle2, XCircle, LogOut, ArrowRight, UserCheck, ShieldAlert, UploadCloud, RefreshCw } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 
@@ -13,67 +13,130 @@ export default function AccountPage() {
   const [orders, setOrders] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    async function loadAccount() {
-      const activeUser = await getCurrentUser();
-      if (!activeUser) {
-        router.push('/membership/register');
-        return;
-      }
+  // Resubmit Modal State
+  const [resubmittingOrder, setResubmittingOrder] = useState<any | null>(null);
+  const [newFile, setNewFile] = useState<File | null>(null);
+  const [newUtr, setNewUtr] = useState('');
+  const [isResubmitting, setIsResubmitting] = useState(false);
+  const [resubmitSuccess, setResubmitSuccess] = useState(false);
 
-      let userProfile = null;
-      let userOrders: any[] = [];
-
-      try {
-        const { data: profileData } = await supabase
-          .from('profiles')
-          .select('*')
-          .eq('id', activeUser.id)
-          .single();
-        if (profileData) userProfile = profileData;
-
-        const { data: ordersData } = await supabase
-          .from('orders')
-          .select('*')
-          .eq('user_id', activeUser.id)
-          .order('created_at', { ascending: false });
-        if (ordersData && ordersData.length > 0) userOrders = ordersData;
-      } catch (err) {
-        // Fallback to local
-      }
-
-      if (!userProfile) {
-        const localP = getLocalProfile();
-        if (localP) {
-          userProfile = localP;
-        } else {
-          userProfile = {
-            full_name: 'IEEE Student Member',
-            usn: '1BM23CS012',
-            email: activeUser.email || 'test@bmsce.ac.in',
-            department: 'Computer Science (CSE)',
-            year_of_study: '2',
-          };
-        }
-      }
-
-      if (userOrders.length === 0) {
-        const localO = getLocalOrders();
-        if (localO && localO.length > 0) {
-          userOrders = localO;
-        }
-      }
-
-      setProfile(userProfile);
-      setOrders(userOrders);
-      setIsLoading(false);
+  const loadAccount = async () => {
+    setIsLoading(true);
+    const activeUser = await getCurrentUser();
+    if (!activeUser) {
+      router.push('/membership/register');
+      return;
     }
+
+    let userProfile = null;
+    let userOrders: any[] = [];
+
+    try {
+      const { data: profileData } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', activeUser.id)
+        .single();
+      if (profileData) userProfile = profileData;
+
+      const { data: ordersData } = await supabase
+        .from('orders')
+        .select('*')
+        .eq('user_id', activeUser.id)
+        .order('created_at', { ascending: false });
+      if (ordersData && ordersData.length > 0) userOrders = ordersData;
+    } catch (err) {}
+
+    if (!userProfile) {
+      const localP = getLocalProfile();
+      if (localP) {
+        userProfile = localP;
+      } else {
+        userProfile = {
+          full_name: 'IEEE Student Member',
+          usn: '1BM23CS012',
+          email: activeUser.email || 'test@bmsce.ac.in',
+          department: 'Computer Science (CSE)',
+          year_of_study: '2',
+        };
+      }
+    }
+
+    if (userOrders.length === 0) {
+      const localO = getLocalOrders();
+      if (localO && localO.length > 0) {
+        userOrders = localO;
+      }
+    }
+
+    setProfile(userProfile);
+    setOrders(userOrders);
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
     loadAccount();
   }, [router]);
 
   const handleSignOut = () => {
     clearUserSession();
     router.push('/');
+  };
+
+  // Handle proof resubmission
+  const handleConfirmResubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newFile || !resubmittingOrder) return;
+    setIsResubmitting(true);
+
+    try {
+      let previewUrl = '';
+      try {
+        const fileExt = newFile.name.split('.').pop();
+        const fileName = `${resubmittingOrder.user_id}/${resubmittingOrder.order_reference}_resubmit.${fileExt}`;
+        const { error: uploadErr } = await supabase.storage
+          .from('public-assets')
+          .upload(fileName, newFile, { upsert: true });
+
+        if (!uploadErr) {
+          previewUrl = supabase.storage.from('public-assets').getPublicUrl(fileName).data.publicUrl;
+        }
+      } catch (e) {}
+
+      if (!previewUrl) {
+        previewUrl = URL.createObjectURL(newFile);
+      }
+
+      // Update Supabase if connected
+      try {
+        await supabase
+          .from('orders')
+          .update({
+            status: 'pending',
+            payment_screenshot_url: previewUrl,
+            utr_reference: newUtr || resubmittingOrder.utr_reference,
+            rejection_reason: null,
+          })
+          .eq('id', resubmittingOrder.id);
+      } catch (e) {}
+
+      // Update local storage
+      resubmitLocalOrderProof(resubmittingOrder.id, previewUrl, newUtr);
+
+      setResubmitSuccess(true);
+      setTimeout(() => {
+        setResubmittingOrder(null);
+        setNewFile(null);
+        setNewUtr('');
+        setResubmitSuccess(false);
+        loadAccount();
+      }, 1500);
+
+    } catch (err: any) {
+      alert('Resubmission failed: ' + err.message);
+    } finally {
+      setIsResubmitting(false);
+    }
   };
 
   if (isLoading) {
@@ -185,7 +248,7 @@ export default function AccountPage() {
                     )}
                     {order.status === 'rejected' && (
                       <span className="inline-flex items-center gap-1.5 bg-red-500/15 border border-red-500/30 text-red-400 px-3 py-1 rounded-full text-xs font-semibold">
-                        <XCircle className="w-3.5 h-3.5" /> Payment Rejected
+                        <XCircle className="w-3.5 h-3.5" /> Action Required (Rejected)
                       </span>
                     )}
                   </div>
@@ -208,18 +271,25 @@ export default function AccountPage() {
                   )}
 
                   {order.status === 'rejected' && (
-                    <div className="bg-red-500/10 border border-red-500/30 p-3.5 rounded-xl text-xs space-y-2">
+                    <div className="bg-red-500/10 border border-red-500/30 p-4 rounded-xl text-xs space-y-3">
                       <div className="flex items-center gap-1.5 text-red-400 font-semibold">
-                        <ShieldAlert className="w-4 h-4" />
-                        <span>Rejection Reason</span>
+                        <ShieldAlert className="w-4 h-4 shrink-0" />
+                        <span>Executive Feedback:</span>
                       </div>
-                      <p className="text-text-muted">{order.rejection_reason || 'Screenshot illegible or transaction not matched.'}</p>
-                      <Link
-                        href="/membership/checkout"
-                        className="inline-block text-primary-orange hover:underline font-semibold mt-1"
+                      <p className="text-white font-medium bg-bg-dark/60 p-2.5 rounded-lg border border-red-500/20">
+                        {order.rejection_reason || 'Screenshot illegible or transaction not matched.'}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setResubmittingOrder(order);
+                          setNewUtr(order.utr_reference || '');
+                        }}
+                        className="bg-primary-orange hover:bg-orange-accent text-white font-bold px-4 py-2 rounded-lg text-xs transition-colors flex items-center gap-1.5 shadow-md shadow-primary-orange/20"
                       >
-                        Resubmit Payment Proof &rarr;
-                      </Link>
+                        <RefreshCw className="w-3.5 h-3.5" />
+                        <span>Resubmit Clear Payment Proof &rarr;</span>
+                      </button>
                     </div>
                   )}
                 </div>
@@ -228,7 +298,76 @@ export default function AccountPage() {
           </div>
         </div>
       </div>
+
+      {/* Resubmit Proof Modal */}
+      {resubmittingOrder && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+          <div className="bg-surface-dark border border-deep-navy/40 rounded-2xl max-w-md w-full p-6 shadow-2xl">
+            <h3 className="font-bold text-white text-lg mb-1">Resubmit Payment Screenshot</h3>
+            <p className="text-xs text-text-muted mb-4">
+              Updating Order <span className="font-mono text-sky-blue font-semibold">{resubmittingOrder.order_reference}</span> (₹{resubmittingOrder.total_amount})
+            </p>
+
+            {resubmitSuccess ? (
+              <div className="p-4 bg-green-500/20 border border-green-500/40 rounded-xl text-center text-xs text-green-300">
+                <CheckCircle2 className="w-8 h-8 text-green-400 mx-auto mb-2" />
+                <span>New payment screenshot uploaded! Status flipped to Pending for review.</span>
+              </div>
+            ) : (
+              <form onSubmit={handleConfirmResubmit} className="space-y-4">
+                <div className="space-y-2">
+                  <label className="block text-xs font-semibold text-text-muted">
+                    New Clear Screenshot <span className="text-primary-orange">*</span>
+                  </label>
+                  <div className="border-2 border-dashed border-deep-navy/50 rounded-xl p-5 text-center hover:border-primary-orange transition-colors cursor-pointer bg-bg-dark relative">
+                    <input 
+                      required 
+                      type="file" 
+                      accept="image/*"
+                      onChange={(e) => setNewFile(e.target.files?.[0] || null)}
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    />
+                    <div className="pointer-events-none flex flex-col items-center">
+                      <UploadCloud className="w-6 h-6 text-sky-blue mb-1.5" />
+                      <span className="text-xs font-medium text-white">{newFile ? newFile.name : 'Select clean screenshot'}</span>
+                      {!newFile && <span className="text-[10px] text-text-muted mt-0.5">PNG or JPG up to 5MB</span>}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-1.5">
+                  <label className="block text-xs font-semibold text-text-muted">Correct UTR / Reference Number</label>
+                  <input
+                    type="text"
+                    value={newUtr}
+                    onChange={(e) => setNewUtr(e.target.value)}
+                    placeholder="12-digit transaction number"
+                    className="w-full bg-bg-dark border border-deep-navy/50 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:ring-1 focus:ring-primary-orange"
+                  />
+                </div>
+
+                <div className="flex justify-end gap-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setResubmittingOrder(null)}
+                    className="px-3.5 py-2 bg-bg-dark border border-deep-navy/50 rounded-lg text-xs font-medium text-text-muted hover:text-white"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    disabled={isResubmitting || !newFile}
+                    className="px-4 py-2 bg-primary-orange hover:bg-orange-accent text-white font-bold rounded-lg text-xs flex items-center gap-1.5 disabled:opacity-50"
+                  >
+                    {isResubmitting && <Loader2 className="w-3.5 h-3.5 animate-spin" />}
+                    <span>{isResubmitting ? 'Submitting...' : 'Upload & Resubmit'}</span>
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
-
